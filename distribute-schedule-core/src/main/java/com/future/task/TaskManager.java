@@ -42,12 +42,13 @@ public class TaskManager {
      * @author mz
      * @date 2023/3/25 4:22 PM
      */
-    public boolean create(TaskRunner taskRunner) {
+    public boolean create(TaskRunner taskRunner, String cron) {
         boolean obtain = command.isObtain(currentServiceId, taskRunner.getTaskName());
         //抢占任务成功 开始创建任务
         if (obtain) {
             Runnable runnable = () -> taskRunner.run();
-            CronTrigger cronTrigger = new CronTrigger(taskRunner.getCron());
+            String processCron = cron != null ? cron : taskRunner.getCron();
+            CronTrigger cronTrigger = new CronTrigger(processCron);
             customTaskScheduler.schedule(runnable, cronTrigger);
             concurrentJobMap.put(taskRunner.getTaskName(), runnable);
             return true;

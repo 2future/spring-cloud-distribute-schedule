@@ -30,6 +30,8 @@ public interface TaskRunner {
      * @author mz
      * @date 2023/3/25 1:41 PM
      */
-    String getCron();
+    default String getCron(){
+        return null;
+    };
 
 }
