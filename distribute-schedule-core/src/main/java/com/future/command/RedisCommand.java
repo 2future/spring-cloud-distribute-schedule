@@ -63,9 +63,7 @@ public class RedisCommand implements Command {
         ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(3);
         executorService.scheduleAtFixedRate(() -> {
             for (String key : havingTask.keySet()) {
-                SetParams setParams = new SetParams();
-                setParams.nx().ex(20);
-                jedis.set(key, "true", setParams);
+                jedis.expire(key, 20);
             }
         }, 10, 10, TimeUnit.SECONDS);
     }
