@@ -12,7 +12,7 @@ public class TaskConfig {
 
     private String taskName;
 
-    private String corn;
+    private String cron;
 
     public String getTaskName() {
         return taskName;
@@ -22,12 +22,11 @@ public class TaskConfig {
         this.taskName = taskName;
     }
 
-    public String getCorn() {
-        return corn;
+    public String getCron() {
+        return cron;
     }
 
-    public void setCorn(String corn) {
-        this.corn = corn;
+    public void setCron(String cron) {
+        this.cron = cron;
     }
-
 }

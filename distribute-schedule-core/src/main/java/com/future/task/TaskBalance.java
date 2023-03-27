@@ -54,7 +54,7 @@ public class TaskBalance {
             for (TaskConfig taskConfig : taskList) {
                 TaskRunner runnerByName = taskManager.getRunnerByName(taskConfig.getTaskName());
                 if (runnerByName != null) {
-                    taskManager.create(runnerByName,taskConfig.getCorn());
+                    taskManager.create(runnerByName,taskConfig.getCron());
                 }
             }
         }, 1, 10, TimeUnit.SECONDS);
