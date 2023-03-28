@@ -5,6 +5,7 @@ import com.future.pod.PodNumber;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -71,7 +72,7 @@ public class TaskBalance {
             if (podNum == 0) {
                 return;
             }
-            int avgTaskNum = taskNum / podNum;
+            int avgTaskNum = (int) Math.ceil(Double.valueOf(Objects.toString(taskNum)) / Double.valueOf(Objects.toString(podNum)));
             if (currentJobSize > avgTaskNum) {
                 int i1 = currentJobSize - avgTaskNum;
                 int cancelNum = 0;
