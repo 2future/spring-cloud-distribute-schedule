@@ -28,8 +28,10 @@ public class TaskManager {
 
     private volatile ConcurrentHashMap<String, Runnable> concurrentJobMap = new ConcurrentHashMap();
 
-    public TaskManager(CustomTaskScheduler customTaskScheduler, Command command, String currentServiceId, List<TaskRunner> taskRunners) {
-        this.customTaskScheduler = customTaskScheduler;
+    public TaskManager(Command command, String currentServiceId, List<TaskRunner> taskRunners) {
+        this.customTaskScheduler = new CustomTaskScheduler();
+        this.customTaskScheduler.setPoolSize(50);
+        this.customTaskScheduler.setThreadNamePrefix("ThreadPoolTaskScheduler");
         this.command = command;
         this.currentServiceId = currentServiceId;
         this.taskRunners = taskRunners;

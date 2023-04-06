@@ -67,7 +67,7 @@ public class TaskBalance {
         executorService.scheduleAtFixedRate(() -> {
             HashMap<String, Runnable> stringRunnableHashMap = taskManager.havingCurrentJob();
             int currentJobSize = stringRunnableHashMap.size();
-            int taskNum = taskDataSource.getTaskNum();
+            int taskNum = taskDataSource.getTaskList().size();
             int podNum = podNumber.get(serviceId);
             if (podNum == 0) {
                 return;

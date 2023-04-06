@@ -16,7 +16,4 @@ public interface TaskDataSource {
 
   List<TaskConfig> getTaskList();
 
-  TaskConfig getByName(String taskName);
-
-  int getTaskNum();
 }

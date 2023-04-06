@@ -32,6 +32,6 @@ public interface TaskRunner {
      */
     default String getCron(){
         return null;
-    };
+    }
 
 }

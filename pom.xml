@@ -12,12 +12,14 @@
 
     <modules>
         <module>distribute-schedule-core</module>
+        <module>spring-boot-starter-distribute-schedule</module>
     </modules>
 
     <properties>
         <spring-context.version>5.2.23.RELEASE</spring-context.version>
         <spring-cloud-commons.version>3.1.6</spring-cloud-commons.version>
         <jedis.version>4.3.0</jedis.version>
+        <spring-boot-starter-distribute-schedule.version>1.0-RELEASE</spring-boot-starter-distribute-schedule.version>
     </properties>
 
     <dependencyManagement>
@@ -39,6 +41,12 @@
                 <groupId>redis.clients</groupId>
                 <artifactId>jedis</artifactId>
                 <version>${jedis.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.github.2future</groupId>
+                <artifactId>spring-boot-starter-distribute-schedule</artifactId>
+                <version>${spring-boot-starter-distribute-schedule.version}</version>
             </dependency>
 
         </dependencies>
