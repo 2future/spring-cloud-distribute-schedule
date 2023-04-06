@@ -31,7 +31,7 @@ public class TaskManager {
     public TaskManager(Command command, String currentServiceId, List<TaskRunner> taskRunners) {
         this.customTaskScheduler = new CustomTaskScheduler();
         this.customTaskScheduler.setPoolSize(50);
-        this.customTaskScheduler.setThreadNamePrefix("ThreadPoolTaskScheduler");
+        this.customTaskScheduler.setThreadNamePrefix("distribute-schedule-2future");
         this.command = command;
         this.currentServiceId = currentServiceId;
         this.taskRunners = taskRunners;

@@ -1,7 +1,7 @@
 package com.future.command;
 
 import com.future.exception.ObtainTaskException;
-import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.params.SetParams;
 
 import java.util.concurrent.ConcurrentHashMap;
@@ -19,14 +19,14 @@ import java.util.concurrent.TimeUnit;
  */
 public class RedisCommand implements Command {
 
-    private Jedis jedis;
+    private JedisPool jedisPool;
 
     private String prefix = "spring:cloud;distribute:schedule";
 
     private static ConcurrentHashMap<String, String> havingTask = new ConcurrentHashMap<>();
 
-    public RedisCommand(Jedis jedis) {
-        this.jedis = jedis;
+    public RedisCommand(JedisPool jedisPool) {
+        this.jedisPool = jedisPool;
         this.renewTime();
     }
 
@@ -35,7 +35,7 @@ public class RedisCommand implements Command {
         String key = prefix + ":" + serverId + ":" + taskName;
         SetParams setParams = new SetParams();
         setParams.nx().ex(20);
-        String set = jedis.set(key, "true", setParams);
+        String set = jedisPool.getResource().set(key, "true", setParams);
         boolean b = "ok".equalsIgnoreCase(set);
         if (b) {
             String ok = havingTask.put(key, "ok");
@@ -63,7 +63,7 @@ public class RedisCommand implements Command {
         ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(3);
         executorService.scheduleAtFixedRate(() -> {
             for (String key : havingTask.keySet()) {
-                jedis.expire(key, 20);
+                jedisPool.getResource().expire(key, 20);
             }
         }, 10, 10, TimeUnit.SECONDS);
     }
